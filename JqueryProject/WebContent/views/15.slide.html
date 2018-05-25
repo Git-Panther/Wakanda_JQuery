@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>slide()</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<style type="text/css">
+	div{
+		width:300px;
+		height:30px;
+		color:orange;
+		background:green;
+		border-radius:10px;
+		text-align:center;
+		border:1px solid black;
+	}
+	.contents{
+		width:300px;
+		height:200px;
+		border:1px solid gray;
+		display:none;
+	}
+</style>
+</head>
+<body>
+	<h1>slide 메소드</h1>
+	<h3>slideDown(), slideUp()</h3>
+	<div>1번째 메뉴</div>
+	<p class="contents">1번째 내용</p>
+	<div>2번째 메뉴</div>
+	<p class="contents">2번째 내용</p>
+	<div>3번째 메뉴</div>
+	<p class="contents">3번째 내용</p>
+	<div>4번째 메뉴</div>
+	<p class="contents">4번째 내용</p>
+	<div>5번째 메뉴</div>
+	<p class="contents">5번째 내용</p>
+	<script type="text/javascript">
+		$(function(){
+			$("div").click(function(){
+				$(this).next("p").slideToggle("slow", function(){alert("토글 완료")});
+				// display 속성을 확인하여 열렸으면 Up 닫혔으면 Down => .css("display") 값 확인
+			});
+		});
+	</script>
+</body>
+</html>

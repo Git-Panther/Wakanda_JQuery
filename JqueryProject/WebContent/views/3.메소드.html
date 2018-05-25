@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>3. 메소드</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<style>
+	.first{color:red;}
+	.second{color:pink;}
+	.third{color:orange;}
+</style>
+</head>
+<body>
+	<h1>메소드</h1>
+	<h3>css()</h3>
+	<p>객체의 스타일 값을 가져오거나, 변경할 때 사용</p>
+	<h4 class="first">test-0</h4>
+	<h4 class="second">test-1</h4>
+	<h4 class="third">test-2</h4>
+	<h4 class="first">test-3</h4>
+	<script>
+		$(function(){
+			$(".first").css("color", "black");
+			$(".third").css({
+				"font-size":"30px"
+				, "background":"green"
+			});
+			
+			var $third = $(".third");
+			console.log("배경색 : ", $third.css("background"));
+			console.log("글자 크기 : ", $third.css("font-size"));
+		});
+	</script>
+	<hr/>
+	<h3>attr()</h3>
+	<p>
+		해당 객체의 속성값을 가져오거나, 속성을 추가할 때 사용한다.
+		<br>
+		html 문서에 속성이 설정되어 있지 않으면 해당 속성값을 undefined로 가져온다.
+	</p>
+	<img src="../images/flower1.PNG" width="400" height="300" />
+	<img src="../images/flower2.PNG" width="400" height="300" />
+	<button onclick="changeImage();">이미지 교체</button>
+	<script>
+		$(function(){
+			// 여러 개가 선택되면 첫 번째 항목에 attr이 적용됨
+			var imgSrc = $("img").attr("src");
+			console.log("이미지 경로", imgSrc);
+			
+			// 함수를 이용하여 순번과 값을 추출할 수 있다.
+			$("img").attr("src", function(index, value){
+				console.log(index, value);
+			});
+			
+			$("img").attr({"width":"100px", "height":"100px"});
+			$("img").removeAttr("width").removeAttr("height");
+		});
+		// changeImage() 호출하면 flower4.png로 교체
+		function changeImage(){
+			$("img").attr({"src":"../images/flower4.PNG"});
+		}
+	</script>
+	<hr>
+	<h3>prop()</h3>
+	<p>
+		속성값 중 boolean 형으로 나타낼 수 있는 값에 대해선 boolean으로 return함
+		<br>
+		자바스크립트에서 동적으로 객체를 다룰 때 주로 사용
+	</p>
+	<form id="tahmkench" method="post" action="orderFoods">
+		<input type="checkbox" id="checkAll" name="checkAll"> 전체 선택
+		<br/><input type="checkbox" id="teemo" name="teemo"> 티모
+		<br/><input type="checkbox" id="lulu" name="lulu"> 룰루
+		<br/><input type="checkbox" id="rumble" name="rumble"> 럼블
+		<br/><input type="checkbox" id="tristana" name="tristana"> 트리스타나
+		<br/><input type="checkbox" id="gnar" name="gnar"> 나르
+	</form>
+	<script>
+		$(function(){
+			$("input[type=checkbox]").click(function(){
+				var result = $(this).prop("checked");
+				alert(result + "   " + $(this).prop("name"));
+			});
+			
+			// 전체 선택을 누르면 모든 체크 선택
+			$("#checkAll").click(function(){
+				var flag = $(this).prop("checked");
+				$("input[type=checkbox]").prop("checked", flag);			
+			});
+			// 해제하면 모두 취소
+		});		
+	</script>
+	<hr>
+	<h3>input타입 필터 선택자</h3>
+	<p>input 태그의 type속성에 따라 문서 객체 선택 가능</p>
+	<label>텍스트상자 : </label><input type="text"><br>
+	<label>패스워드 : </label><input type="password"><br>
+	<label>체크박스 : </label><input type="checkbox"><br>
+	<label>라디오버튼 : </label><input type="radio"><br>
+	<br>
+	<label>버튼 : </label><input type="button" value="버튼"><br>
+	<label>리셋버튼 : </label><input type="reset" value="리셋"><br>
+	<label>submit버튼 : </label><input type="submit" value="제출"><br>
+
+	<label>파일 : </label><input type="file"><br>
+	<br>
+	<!-- submit버튼으로 사용하고, 전송시 클릭좌표를 전송 -->
+	<label>이미지 : </label><input type="image" src="../images/flower1.PNG" width="200" height = "200"><br>
+	<script>
+		$(function(){
+			// tag:type 쉽게 쓸 수 있음
+			$("input:text").val("테스트 입력 값!!!!!");
+			//버튼의 사이즈를 200/100, 왕버튼				
+			$("input:button").css({"width":"200px", "height":"100px"});
+			//체크박스를 전부다 checked
+			$("input:checkbox").prop("checked", true);	
+			//file - 배경색 회색
+			$("input:file").css("background", "gray");	
+			//비밀번호 - 배경색 노랑
+			$("input:password").css("background", "yellow");	
+			//라디오 - 전부다 선택
+			$("input:radio").prop("checked", true);
+			//reset - 글자 - 초기화
+			$("input:reset").val("초기화");
+			//submit - 글자색 - 흰색, 배경색 - purple
+			$("input:submit").css("color", "white").css("background", "purple");
+			
+			// 마우스가 이미지 안으로 들어오면 발생
+			$("input:image").mouseenter(function(){
+				$(this).attr("src", "../images/river1.PNG");
+			});
+			
+			// 마우스가 이미지 밖으로 나가면
+			$("input:image").mouseout(function(){
+				$(this).attr("src", "../images/flower1.PNG");
+			});
+		});
+	</script>
+	<hr/>
+	<h3>checkbox의 가상 선택자</h3>
+	취미 : <input type="checkbox" name="top" value="sion"> 사이온
+	<input type="checkbox" name="top" value="orne"> 오른
+	<input type="checkbox" name="top" value="cammilu"> 카밀
+	<input type="checkbox" name="top" value="gangflank"> 갱플랭크
+	<input type="checkbox" name="top" value="vladimir"> 블라디미르
+	<button onclick="testSeletor();">Run</button>
+	<script>
+		function testSelector(){
+			var checkedList = $("input[name=top]:checked");
+			console.log(checkedList);
+			var resultStr = "";
+			checkedList.each(function(index, item){
+				resultStr += item.value + " ";
+			});
+			console.log(resultStr);
+		}
+	</script>
+	<hr>
+	<h3>>selected 상태 선택자</h3>
+	<select id="country">
+		<option value="lck">LCK</option>
+		<option value="lpl selected">LPL</option>
+		<option value="lcs eu">LCS EU</option>
+		<option value="lms">LMS</option>
+	</select>
+	<br/>
+	선택한 지역 : <input type="text" id="selectCountry"/>
+	<script>
+		$("#country").change(function(){
+			//var country = $("#country > option:selected").val();
+			var country = $("#country").val();
+			//console.log(country);
+			$("#selectCountry").val(country);
+			
+		});
+	</script>
+	<hr/>
+	<h3>disabled</h3>
+	활성화 text : <input type="text" /><br>
+	비활성화 text : <input type="text" disabled/><br>
+	활성화 button : <input type="button" /><br>
+	비활성화 button : <input type="button" disabled/>
+	<script>
+		$(function(){
+			$("input:enabled").css("background", "gray");
+			$("input:disabled").css("background", "red");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Event</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<style>
+	.outer{
+		width:200px;
+		height:200px;
+		background:red;
+		padding:50px;
+	}
+	
+	.inner{
+		width:100px;
+		height:100px;
+		background:orange;
+		padding:50px;
+	}
+</style>
+</head>
+<body>
+	<h1>이벤트 연결 메소드</h1>
+	<h3>mouseover/mouserout, mouseenter/mouseleave</h3>
+	<p>
+		over/out : 자식 객체에 접근할 때에도 실행<br>
+		enter/leave : 해당 객체에서만 실행
+	</p>
+	<div class="outer">
+		<div class="inner">
+		
+		</div>
+	</div>
+	<script>
+		$(function(){/*
+			$(".outer").mouseover(function(){
+				console.log("ENTER");
+			});
+			
+			$(".outer").mouseout(function(){
+				console.log("LEAVE");
+			});*/
+			
+			$(".outer").mouseenter(function(){
+				console.log("ENTER");
+			});
+			
+			$(".outer").mouseleave(function(){
+				console.log("LEAVE");
+			});
+			
+		});
+	</script>
+	<hr>
+	<h3>hover()</h3>
+	<p>mouseenter/mouseleave 동시에 사용하는 효과</p>
+	<div style="font-size:30px;" id="test1">HOVER 테스트!!</div>
+	<script>
+		$(function(){
+			$("#test1").hover(function(){
+				//$(this).addClass("reverse");
+				$(this).toggleClass("reverse");
+			}, function(){
+				//$(this).removeClass("reverse");
+				$(this).toggleClass("reverse");
+			});
+		});
+	</script>
+	<hr>
+	<h3>키보드 이벤트</h3>
+	<p>
+		keydown : 키를 누를 때*
+		keypress : 키가 입력될 때
+		keyup : 키가 떼어질 때
+	</p>
+	<input type="text" id="test2">
+	<script>
+		$(function(){
+			/*
+			$("#test2").keydown(function(e){
+				console.log("key : " + e.key);
+				//console.log()
+			});
+			*/
+			//$("#test2").on("keypress",function(e){
+			//	console.log("keypress : " + e.key);
+			//});
+			$("#test2").keyup(function(e){
+				console.log("keyup : " + e.key);
+			});		
+		});
+	</script>
+	<hr>
+	<div>
+		<p><span id="counter">0</span> / 150</p>
+		<textarea cols="70" rows="5" id="intro"></textarea>
+	</div>
+	<script>
+		// 키보드를 입력하면 textarea에 length -> span 영역에 글자 수 출력
+		// 10 글자가 넘었을 때, 글자색을 빨간색으로 바꿈. 10글자 이하이면 흑색
+		$(function(){
+			$("#intro").keyup(function(e){
+				if($(this).val().length > 10) {
+					$(this).css("color", "red");
+				}
+				else{
+					$(this).css("color", "black");
+				}
+			});
+		});
+	</script>
+</body>
+</html>

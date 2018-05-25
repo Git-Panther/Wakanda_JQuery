@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>4.jquery 선택자 2</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>선택자 2</h1>
+	<h3>순서에 따른 필터 선택자</h3>
+	<p>:first, :last, :even, :odd</p>
+	<table>
+		<tr><td>이름</td><td>나이</td><td>소속</td></tr>
+		<tr><td>이상혁</td><td>22</td><td>skt</td></tr>
+		<tr><td><a href="#">곽보성</a></td><td>19</td><td>kz</td></tr>
+		<tr><td>손우현</td><td>17</td><td>kt</td></tr>
+		<tr><td>이서행</td><td>24</td><td>afreeca</td></tr>
+		<tr><td>이민호</td><td>23</td><td>gen.g</td></tr>
+		<tr><td colspan="2">합계</td><td>6명</td></tr>
+	</table>
+	<script>
+		$(function(){/*
+			$("tr:odd").css("background", "yellow");
+			$("tr:even").css("background", "pink");
+			$("tr:first").css("background", "black").css("color", "white");
+			$("tr:last").css("background", "orangered").css("color", "white");
+		*/});		
+	</script>
+	<hr>
+	<h3>함수 형태의 필터 선택자</h3>
+	<p>:eq(), :gt(), lt(), :contains(), :has(), :not()</p>
+	<script>
+		$(function(){
+			/*
+			$("tr:nth-child(2n)").css("background", "pink");
+			$("tr:nth-child(3n)").css("background", "green");
+			*/
+			// 인텍스는 0부터, 해당 인덱스 번째 객체 선택
+			$("tr:eq(0)").css("background", "black").css("color", "white");
+			
+			// n번째를 초과하는 객체 선택
+			$("tr:eq(6)").css("background", "red").css("color", "white");
+			
+			// n번째 미만에 위치하는 객체 선택
+			$("tr:lt(7)").css("font-size", "30px");
+			
+			// 해당 문자열을 포함하는 객체
+			$("td:contains('이')").css("color", "gray");
+			
+			// 해당 선택자를 가지고 있는 객체
+			$("td:has(a)").css("background", "skyblue");
+			
+			// 해당 선택자와 일치하지 않는 객체
+			$("td:not(:has(a))").css("color", "green");
+		});
+	</script>
+	<hr>
+	<h3>필터링 메소드 : filter()</h3>
+	<h4 class="test">test 1</h4>
+	<h4 class="test">test 2</h4>
+	<h4 class="test">test 3</h4>
+	<h4 class="test">test 4</h4>
+	<h4>test 5</h4>
+	<h4 class="test">test 6</h4>
+	<script>
+		$(function(){
+			// 태그 선택자 h4 - 짝수번째 - 배경색 검정, 글자색 흰색
+			// $("h4.test:nth-child(2n+1)").css("background", "black").css("color", "white");
+			// $("h4").filter(":odd").css("background", "black").css("color", "white");
+			$("h4").filter(function(index){
+				return index % 2 == 1; // function으로 필터 선택
+			}).css("background", "black").css("color", "white");
+			
+			$("h4").first().css("background", "blue");
+			$("h4").last().text("h4 중 마지막 객체입니다.");
+			$("h4").eq(1).text("h4 중 인덱스가 1인 객체입니다.");
+			$("h4").not(".test").css("background", "pink");
+		});
+	</script>
+</body>
+</html>

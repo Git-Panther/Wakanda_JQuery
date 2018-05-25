@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>method 2</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>반복문을 지원하는 메소드</h1>
+	<h3>each()</h3>
+	<p>
+		배열 데이터를 다룰 때 사용하는 메소드<br/>
+		for..in과 비슷한 형태로 객체 배열 사용 지원
+	</p>
+	<p>
+		- $(selector).each(function(index, item){...});
+		- $.each(array, function(index, item){...});
+	</p>
+	<div id="areaEach">
+		<ul>
+		</ul>
+	</div>
+	<script>
+		$(function(){
+			var arr = [
+				{name:"Inven", url:"http://www.inven.com"},
+				{name:"Google", url:"http://www.google.com"},
+				{name:"W3Schools", url:"http://www.w3schools.com"}
+			];
+			$.each(arr, function(index, item){
+				var str = "";
+				str = "<li><a href='" + item.url + "'>" + item.name + "</a></li>";
+				$("#areaEach ul").html($("#areaEach ul").html() + str); // 기존 값을 불러와서 더해줘야 계속 갱신된다.
+			});			
+		});
+	</script>
+	<hr>
+	<div id="areaSample">
+		<h4>1</h4>
+		<h4>2</h4>
+		<h4>3</h4>
+		<h4>4</h4>
+		<h4>5</h4>	
+	</div>
+	<script>
+		$(function(){
+			var str = "";
+			$("#areaSample h4").each(function(index, h4Tag){			
+				str += " " + h4Tag.innerHTML;
+				// h4Tag.innerHTML = str;
+				$("#areaSample h4").eq(index).html(str); // 첫 번째와 두 번째는 같은 결과.
+			});
+		});
+	</script>
+	<hr>
+	<h3>is()</h3>
+	<p>패러미터에 설정된 선택자가 해당 객체의 값과 일치하는지를 판단</p>
+	<h3 class="test">test1</h3>
+	<h3>test2</h3>
+	<h3 class="test">test3</h3>
+	<h3>test4</h3>
+	<h3 class="test">test5</h3>
+	<h3 class="test">test6</h3>
+	<script>
+		$(function(){
+			$("h3").each(function(){ // 순번 필요하면 index, item 필수
+				if($(this).is(".test")){// 현재 인덱스
+					// test 클래스가 있는가
+					$(this).text($(this).text() + " selected");
+				} 
+			});
+		});
+	</script>
+	<hr>
+	<h3>$.extend()</h3>
+	<p>객체 데이터를 합칠 때 사용</p>
+	<button id="btnExtend">Extend two objects</button>
+	<script>
+		// 1. 버튼에 클릭 이벤트 설정
+		// 2. 해당 {name:"", age:?}, {job:"", address:""}
+		// 3. 두 개의 객체를 한 개의 객체로 합쳐 console.log(object)로 출력
+		
+		$("#btnExtend").click(function(){
+			var obj1 = {name:"Jian zi hao", age:21};
+			var obj2 = {job:"Pro-Gamer", address:"China", name:"지안즈하오"};
+			console.log($.extend(obj1, obj2)); // obj1에 obj2를 병합
+			console.log(obj1);
+			// 만일 합칠 때 겹치는 키값이 있다면 그대로 덮어쓰니 주의
+			
+			/*
+			$.each(obj2, function(index, item){
+				obj1[index] = item;
+			});
+			console.log(obj1);
+			// 위 방법으로도 가능하지만 지저분하니 extend나 쓰자
+			*/
+			
+		});	
+	</script>
+</body>
+</html>

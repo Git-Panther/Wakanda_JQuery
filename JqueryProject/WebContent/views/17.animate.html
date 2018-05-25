@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Animate</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+<style type="text/css">
+	.area{
+		width:200px;
+		height:200px;
+		background:orangered;
+	}
+	.small-area{
+		width:50px;
+		height:50px;
+		background:orangered;
+		border:1px solid black;
+	}
+	.image{
+		position:relative;
+	}
+	.container{
+		width:155px;
+		height:105px;
+		margin:auto;
+		overflow:hidden;
+		position:relative;
+	}
+</style>
+</head>
+<body>
+	<h1>애니메이션을 다루는 메소드</h1>
+	<h3>animate()</h3>
+	<p>
+		(selector).animate(properties, [duration], [easing], [complete]);
+	</p>
+	<button id="btn1">Run</button>
+	<div id="test1" class="area"></div>
+	<script>
+		$(function(){
+			$("#btn1").click(function(){
+				$("#test1").animate({width:"500px", backgroundColor:"blue"}, 3000, function(){
+					alert("완료");
+				})
+			});
+		});
+	</script>
+	<hr>
+	<img id="image" class="image" alt="여행1 사진 불러오기 실패" src="../images/tour1.jpg" width="150" height="100">
+	<script>
+		$(function(){
+			$("#image").click(function(){
+				$(this).animate({left:"-160px"}, 3000);
+			});
+		});
+	</script>
+	<hr>
+	<p>이미지를 가운데 배치하고 우측으로 slide되도록 처리</p>
+	<div class="container">
+		<img id="img" class="image" alt="여행1 사진 불러오기 실패" src="../images/tour1.jpg" width="150" height="100">
+	</div>
+	<script>
+		$(function(){
+			$("#img").click(function(){
+				$(this).animate({left:"160px"}, "slow");
+			});
+		});
+	</script>
+	<hr>
+	<h3>상대적 크기 설정 애니메이션</h3>
+	<div class="small-area"></div>
+	<div class="small-area"></div>
+	<div class="small-area"></div>
+	<div class="small-area"></div>
+	<div class="small-area"></div>
+	<script type="text/javascript">
+		$(function(){
+			$(".small-area").click(function(){
+				//var width = $(this).css("width"); // px로 가져옴
+				//var height = $(this).css("height");
+				var width = $(this).width(); // 숫자로 가져옴
+				var height = $(this).height();
+				
+				console.log(width, height); // 중간에 연타하면 정해진 값을 안 가져올 수 있음
+				$(this).animate({width:width + 50}, 1500);
+			});
+		});
+	</script>
+</body>
+</html>

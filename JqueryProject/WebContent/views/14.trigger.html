@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Trigger</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>이벤트 트리거</h1>
+	<h3>회원가입 양식</h3>
+	<form action="../index.html">
+		<table id="wrap">
+			<caption>회원 가입</caption>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" id="name" required/></td> <!-- required로 반드시 입력하게 함 -->
+			</tr>
+			<tr>
+				<th>ID</th>
+				<td><input type="text" name="id" id="id" required/></td>
+			</tr>
+			<tr>
+				<th>비밀번호</th>
+				<td><input type="password" name="pw" id="pw" required/></td>
+			</tr>
+			<tr>
+				<th>비밀번호 확인</th>
+				<td><input type="password" id="pwc" required/></td><!-- 다른 페이지로 넘길 거 아니면 name 설정 없는 게 좋음 -->
+			</tr>
+			<tr>
+				<th>E-mail</th>
+				<td><input type="email" name="email" id="email" required/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="회원가입">
+					<input type="reset" value="취소">
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script>
+		$(function(){
+			$("#name").focus(function(){
+				console.log(this + " focused"); // 집중되었을 때
+			}).blur(function(){
+				console.log(this + " blured"); // 커서 집중 떼버렸을 때
+			}).change(function(){
+				console.log(this + " changed"); // 텍스트 값이 바뀌었을 때
+			}).select(function(){
+				console.log(this + " selected");
+			});
+			
+			// 이름을 입력할 때 정상적으로 입력되지 않았으면 이름을 확인하라는 alert 발생
+			// 이름은 한글 두 자리 이상
+			// 정상이면 흰색, 아니면 적색
+			
+			var regName = /^[가-힣]{2,}$/;
+			var regPW = [/^[a-zA-Z]{6, 32}$/, /[]/, /[]/];
+			
+			$("input:submit").click(function(){
+				if(!regName.test($("#name").val())){
+					alert("이름 : 한글 두 자리 이상");
+					$("#name").css("background", "red");
+				} else{
+					$("#name").css("background", "white");
+				}
+			});
+			
+			// 비밀번호 입력 후 비밀번호 확인란 입력시
+			// 기존 비밀번호 값과 비밀번호 확인한 값을 비교하여 갑소가 결과 출력
+			// 일치- 배경색 흰색, 글자색 검은색
+			// 불일치 - 배경색 적색, 글자색 흰색
+			
+			var pwEvent = function(){
+				if($("#pw").val() != $("#pwc").val()){
+					$("#pwc").css({"background":"red", "color":"white"});
+				} else{
+					$("#pwc").css({"background":"white", "color":"black"});
+				}
+			};
+			
+			$("#pw").keyup(pwEvent);
+			$("#pwc").keyup(pwEvent);
+			
+			$("form").submit(function(){
+				if(confirm("회원가입을 하시겠습니까?")){
+					return true;
+				} else{
+					return false;
+				}
+			});
+		});
+	</script>
+	<hr>
+	<h3>trigger()</h3>
+	<p>
+		특정 이벤트 실행하면 다른 객체의 이벤트를 실행시킬 때 사용
+	</p>
+	<button id="clickBtn">0</button>
+	<button id="triggerBtn">trigger 호출 버튼</button>
+	<script>
+		$("#clickBtn").click(function(){
+			var count = parseInt($(this).text());
+			$(this).text(count + 1);
+		});
+		$("#triggerBtn").click(function(){
+			$("#clickBtn").trigger("click");
+			// 트리거를 통해 click 이벤트 호출
+		});
+	</script>
+	</body>
+</html>

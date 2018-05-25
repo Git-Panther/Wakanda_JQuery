@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Display</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>display 속성을 다루는 jquery 메소드</h1>
+	<p>
+		show() : 객체를 보여주는 메소드
+		hide() : 객체를 숨기는 메소드
+	</p>
+	<p>패러미터 : (speed, easing, callback)</p>
+	<img src="../images/tour1.jpg" alt="여행지 사진" id="tourImg">
+	<br>
+	<button id="show">보여주기</button>
+	<button id="hide">숨기기</button>	
+	<script>
+		$(function(){
+			$("#show").on("click", function(){
+				$("#tourImg").show(1000);
+			});
+			$("#hide").on("click", function(){
+				$("#tourImg").hide(1000);
+			});
+		});
+	</script>
+	<hr>
+	<h3>toggle()</h3>
+	<p>해당 이미지가 보이는 상태이면 안 보이게 하고 반대로 안 보이면 보이도록 한다.</p>
+	<img src="../images/tour1.jpg" alt="여행지 사진" id="tourImg2">
+	<br>
+	<button id="toggle">toggle()</button>
+	<script>
+		$(function(){
+			$("#toggle").click(function(){
+				$("#tourImg2").toggle("slow", function(){alert("toggle finished")});
+			});
+		});
+	</script>
+</body>
+</html>

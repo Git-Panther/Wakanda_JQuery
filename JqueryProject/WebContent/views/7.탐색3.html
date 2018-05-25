@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>탐색 3</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<style>
+	.wrap *{
+		border : 2px solid lightgray;
+		display : block;
+		padding : 5px;
+		margin : 10px;
+		color : gray;
+	}
+</style>
+</head>
+<body>
+	<h1>객체 탐색 3</h1>
+	<p>형제 노드 탐색 방법 : siblings()</p>
+	<div class="wrap">	
+		<p>p</p>
+		<h2>h2</h2>
+		<span>span</span>
+		<h3>h3</h3>
+		<p class="pause">p</p>
+		<h2 class="pause">h2</h2>
+	</div>
+	<script>
+		$(function(){
+			// 선택된 요소 이외의 형제 요소 선택
+			//$("span").siblings().css("border", "2px solid red");
+			//$("span").siblings("p").css("color", "red");
+			
+			// 자신의 다음 형제 선택자
+			//$("span").next().css("border", "2px solid red");
+			
+			// 자신 이후의 형제 선택자들
+			// $("span").nextAll().css("border", "2px solid red");
+			
+			// 자신 이후 특정 위치 직전까지의 형제 선택자들
+			// $("span").nextUntil("h2.pause").css("border", "2px solid red");
+		
+			// 이하는 next에서 prev만 바꿈. 앞의 형제 선택자를 선택
+			
+			//$("h3").prev().css("border", "2px solid red");
+			
+			//$("h3").prevAll().css("border", "2px solid red");
+			
+			$("h3").prevUntil("h2").css("border", "2px solid red");
+		});
+	</script>
+</body>
+</html>

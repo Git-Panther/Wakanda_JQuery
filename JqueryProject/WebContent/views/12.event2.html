@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Event 2</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>이벤트 2</h1>
+	<h3>이벤트 관련 속성</h3>
+	<p>
+		이벤트 핸들러의 매개변수로 event
+		e를 제외하고는 다른 키워드 불가
+	</p>
+	<script>
+		$("#btn").click(function(){
+			
+		});
+	</script>
+	<hr>
+	<h3>이벤트를 연결 하는 방법</h3>
+	<p>
+		bind() - 이벤트 핸들러를 설정<br>
+		$(선택자).bind("이벤트 종류", "이벤트 핸들러");<br>
+		unbind() - 설정 된 이벤트 핸들러 제거<br>
+		$(선택자).unbind("이벤트 종류");
+		on(), off() - 기본의 bind/unbind -> 대체 
+	</p>
+	<div id="test1">마우스를 올려 보세요~</div>
+	<button id="btn1">이벤트 취소</button>
+	<script>
+		$(function(){
+			/*$("#test1").bind("mouseenter",function(){
+				$(this).css("background","black").css("color","white");
+			});
+			$("#test1").bind("mouseleave",function(){
+				$(this).css("background","white").css("color","black");
+			});*/
+			$("#test1").bind("mouseenter",function(){
+				$(this).css("background","black").css("color","white");
+			}).bind("mouseleave",function(){
+				$(this).css("background","white").css("color","black");
+			});
+			
+			$("#btn1").click(function(){
+				$("#test1").unbind("mouseenter").unbind("mouseleave");
+			});				
+		});
+		// bind는 구시대 방식. on/off를 쓰도록
+	</script>
+	<hr>
+	<div id="test2">마우스를 올려 보세요~(on)</div>
+	<button id="btn2">이벤트 취소</button>
+	<script>
+		$(function(){
+			$("#test2").on(
+					{"mouseenter":function(){
+						$(this).css("background","black").css("color","white");
+					}
+					, "mouseleave":function(){
+						$(this).css("background","white").css("color","black");
+					}
+			});
+			
+			$("#btn2").on("click",function(){
+				$("#test2").off("mouseenter").off("mouseleave");
+			});
+		});
+	</script>
+	<hr>
+	<h3>이벤트가 한 번만 실행되도록 설정</h3>
+	<p>one() : 사용하는 방법은 bind와 동일</p>
+	<button id="oneBtn">한 번만 실행되는 버튼</button>
+	<script>
+		$(function(){
+			$("#oneBtn").one("click", function(){
+				alert("Just one time.");
+			});
+		});
+	</script>
+</body>
+</html>

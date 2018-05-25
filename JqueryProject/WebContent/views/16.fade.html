@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fade</title>
+<script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
+<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.min.js"></script>
+</head>
+<body>
+	<h1>fade() 메소드</h1>
+	<h3>fadeIn(), fadeOut(), fadeToggle(), fadeTo()</h3>
+	<button id="fadeInBtn">fadeIn()</button>
+	<button id="fadeOutBtn">fadeOut()</button>
+	<button id="fadeToggleBtn">fadeToggle()</button>
+	<button id="fadeToBtn">fadeTo()</button>
+	<br>
+	<img id="flower" src="../images/flower3.PNG" alt="꽃 사진 불러오기 실패">
+	<script>
+		$(function(){
+			$("#fadeInBtn").click(function(){
+				$("#flower").fadeIn("slow");
+			});
+			$("#fadeOutBtn").click(function(){
+				$("#flower").fadeOut("slow");
+			});
+			$("#fadeToggleBtn").click(function(){
+				$("#flower").fadeToggle("slow", function(){alert("토글 완료");});
+			});
+			$("#fadeToBtn").click(function(){
+				$("#flower").fadeTo("slow", 0.5);
+			});
+		});
+	</script>
+	<hr>
+	<img id="fadeTest" src="../images/flower5.PNG" alt="꽃 사진 5 불러오기 실패">
+	<div id="selectDiv" style="width:100px; height:100px;">선택 영역</div>
+	<script>
+		// 해당 div에 마우스를 올리면 꽃 그림 5를 안 보이게 하기
+		// 마우스가 나가면 이미지가 원래대로 출력되도록 처리
+		$(function(){
+			$("#selectDiv").hover(function(){
+				$("#fadeTest").fadeToggle("slow");
+			});
+		});
+	</script>
+	<hr>
+	<h3>fadeTo()</h3>
+	<p>명도 설정이 가능</p>
+	<img id="fadeToTest" alt="강 사진 1 없음" src="../images/river1.PNG">
+	<script>
+		$(function(){
+			$("#fadeToTest").hover(function(){
+				$(this).fadeTo("slow", 0.3);
+			}, function(){
+				$(this).fadeTo("slow", 1);
+			});
+		});
+	</script>
+</body>
+</html>

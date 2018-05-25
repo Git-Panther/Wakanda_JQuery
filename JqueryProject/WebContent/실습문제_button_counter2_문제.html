@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="eng">
+<head>
+	
+    <meta charset="UTF-8">
+    <title>Button Counter</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<!-- 상대 경로인데 위로 올라가려면 .. 쓴다. -->
+	<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <style>
+    .data-test2{
+        width:100px;
+        height:100px;
+        margin-right:10px;
+        display:inline-block;
+        font-size:30px;
+        background:rgb(0,255,255)
+    }
+    .data-test{
+        width:100px;
+        height:100px;
+        margin-right:10px;
+        display:inline-block;
+        font-size:30px;
+        background:rgb(0,255,255)
+    }
+    </style>
+    <script>
+    	$(function(){
+    		var func = function(){
+    			var incount = parseInt($(this).text());
+    			if(incount != 10){
+    				$(this).text(++incount).css("background", "rgb("+(incount*25.5)+", 255, 255)");
+    			} else{
+    				$(this).off("click");
+    			}			
+    		};
+    		
+    		//$(".data-test2").click(func);   		
+    		//$(".data-test").click(func);
+    		$("button").click(func);
+    	});
+    </script>
+</head>
+<body>
+    <h3>Button Counter 1</h3>
+    <button class="data-test2"> 0 </button>
+  
+    <h3>Button Counter 2</h3>
+    <button class="data-test"> 0 </button>
+    <button class="data-test"> 0 </button>
+    <button class="data-test"> 0 </button>
+    <button class="data-test"> 0 </button>
+    <button class="data-test"> 0 </button>
+   
+</body>
+</html>

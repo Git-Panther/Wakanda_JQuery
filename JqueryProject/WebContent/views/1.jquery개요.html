@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>1.jquery 개요</title>
+
+<script type="text/javascript" src="/JqueryProject/js/jquery-3.3.1.min.js"></script>
+
+<!-- 인터넷이 안되면 위 파일 갖다 쓰는 방식이 좋다. -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+<body>
+	<h1>jQuery 개요</h1>
+	<h3>jQuery란?</h3>
+	<p>
+		복잡한 Javascript 식을 대신하여 손쉽게 사용하기 위해 나온 Javascript 기반 (경량)라이브러리
+	</p>
+	<p>
+		jquery의 장점
+		<br>
+		1. DOM과 객체들의 처리가 쉽다. (선택자, 문법)
+		2. ajax, 이벤트 처리와 같은 기능을 다양하게 제공한다.
+		3. 플러그인을 사용하여 UI를 구현, 차트, 슬라이드, 테이블과 같은 기능을 손쉽게 구현할 수 있다.
+	</p>
+	<h3>jquery 연동 방법</h3>
+	<p>1. script - jquery 선언</p>
+	<p>2. script - src(link - cdn)(web, local)</p>
+	<script>
+		// $("p").css("background", "red");
+		// p 태그들의 css 배경을 붉은색으로
+		// jquery를 뜻하는 $
+	</script>
+	<hr/>
+	<h3>jQuery(document).ready();</h3>
+	<p>
+		페이지가 로드뙜을 때 호출되는 이벤트 핸들러
+		<br>
+		(window.onload, body-onload)
+		<br>
+		jquery 선언한 ready 메소드는 중복 선언이 가능
+	</p>
+	<script>
+		jQuery(document).ready(function(){
+			$("p").css("background", "gray");	
+		});
+		
+		$(function(){
+			// onload 이벤트는 굳이 길게 쓸 필요 없이 축약 가능
+			alert("jquery ready() test");
+		});
+	</script>
+	<hr>
+	<h3>jQuery 버전</h3>
+	<p>
+		1.x : 구버전 브라우저 지원(IE 6, 7, 8) => jquery compact 3.0 (서비스종료)
+		2.x : 신버전 브라우저 지원 + 코드 경량화 => jquery 3.0
+	</p>
+</body>
+</html>
